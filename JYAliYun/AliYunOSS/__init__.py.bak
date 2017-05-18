@@ -3,7 +3,7 @@
 
 from time import time
 from lxml import etree
-from urllib.parse import quote
+from urllib import quote
 from JYAliYun import AliYUN_DOMAIN_NAME
 from JYAliYun.AliYunObject import ObjectManager
 from JYAliYun.Tools import ali_signature, jy_requests
@@ -144,7 +144,7 @@ class OSSBucket(ObjectManager):
         res_ele = etree.fromstring(r_d.text.encode("utf-8"))
         object_list = []
         for item_content in res_ele.findall("Contents"):
-            object_meta = {"key": item_content.find("Key").text, "size": int(item_content.find("Size").text)}
+            object_meta = {"key": item_content.find("Key").text, "size": long(item_content.find("Size").text)}
             object_list.append(object_meta)
         for item_content in res_ele.findall("CommonPrefixes"):
             object_meta = {"key": item_content.find("Prefix").text, "size": 0}
